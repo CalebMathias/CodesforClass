@@ -305,3 +305,107 @@ numpy_view = tensor_var.numpy()
 tensor_var.assign([[5, 6], [7, 8]])
 print(f"Modified tensor: \n{tensor_var}")
 print(f"NumPy view after tensor modification: \n{numpy_view}")  # May or may not reflect changes depending on implementation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import tensorflow as tf
+# Common TensorFlow data types
+print("Common TensorFlow data types:")
+print(f"- tf.float32: {tf.constant(1.0, dtype=tf.float32)}")
+print(f"- tf.float64: {tf.constant(1.0, dtype=tf.float64)}")
+print(f"- tf.int32: {tf.constant(1, dtype=tf.int32)}")
+print(f"- tf.int64: {tf.constant(1, dtype=tf.int64)}")
+print(f"- tf.bool: {tf.constant(True, dtype=tf.bool)}")
+print(f"- tf.string: {tf.constant('Hello', dtype=tf.string)}")
+print(f"- tf.complex64: {tf.constant(1+2j, dtype=tf.complex64)}")
+
+# Checking data types
+tensor = tf.constant([1, 2, 3])
+print(f"Tensor: {tensor}")
+print(f"Data type: {tensor.dtype}")
+
+# Type conversion
+float_tensor = tf.cast(tensor, dtype=tf.float32)
+print(f"After casting: {float_tensor}")
+print(f"New data type: {float_tensor.dtype}")
+
+# Data type compatibility
+a = tf.constant([1, 2, 3], dtype=tf.int32)
+b = tf.constant([1.0, 2.0, 3.0], dtype=tf.float32)
+
+# This would fail due to type mismatch
+try:
+    # c = tf.concat([a, b], axis=0)  # This would cause an error
+    pass
+except tf.errors.InvalidArgumentError as e:
+    print(f"Error: {e}")
+
+# Convert types to make them compatible
+a_float = tf.cast(a, dtype=tf.float32)
+c = tf.concat([a_float, b], axis=0)
+print(f"Concatenated after type casting: {c}")
+
+# Default types
+print(f"Default float type: {tf.constant(1.0).dtype}")  # Usually tf.float32
+print(f"Default integer type: {tf.constant(1).dtype}")  # Usually tf.int32
