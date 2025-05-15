@@ -237,3 +237,71 @@ print(f"New shape: {squeezed.shape}")  # Back to TensorShape([2, 3])
 transposed = tf.transpose(a)
 print(f"Transposed tensor: {transposed}")
 print(f"New shape: {transposed.shape}")  # TensorShape([3, 2])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import tensorflow as tf
+import numpy as np
+# NumPy array to TensorFlow tensor
+numpy_array = np.array([[1, 2, 3], [4, 5, 6]])
+tensor_from_np = tf.convert_to_tensor(numpy_array)
+print(f"NumPy array: \n{numpy_array}")
+print(f"TensorFlow tensor: \n{tensor_from_np}")
+
+# TensorFlow tensor to NumPy array
+tensor = tf.constant([[1, 2, 3], [4, 5, 6]])
+numpy_from_tf = tensor.numpy()  # or np.array(tensor)
+print(f"TensorFlow tensor: \n{tensor}")
+print(f"NumPy array: \n{numpy_from_tf}")
+
+# Memory sharing
+# Changes to the NumPy array can affect the tensor
+numpy_array = np.array([[1, 2, 3], [4, 5, 6]])
+tensor = tf.convert_to_tensor(numpy_array)
+print(f"Original NumPy array: \n{numpy_array}")
+print(f"Original tensor: \n{tensor}")
+
+# Modify the NumPy array
+numpy_array[0, 0] = 99
+# This won't affect the tensor since tf.convert_to_tensor makes a copy
+print(f"Modified NumPy array: \n{numpy_array}")
+print(f"Tensor after NumPy modification: \n{tensor}")
+
+# However, tensor.numpy() can share memory with the original tensor in some cases
+tensor_var = tf.Variable([[1, 2], [3, 4]])
+numpy_view = tensor_var.numpy()
+tensor_var.assign([[5, 6], [7, 8]])
+print(f"Modified tensor: \n{tensor_var}")
+print(f"NumPy view after tensor modification: \n{numpy_view}")  # May or may not reflect changes depending on implementation
