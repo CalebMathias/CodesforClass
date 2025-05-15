@@ -409,3 +409,94 @@ print(f"Concatenated after type casting: {c}")
 # Default types
 print(f"Default float type: {tf.constant(1.0).dtype}")  # Usually tf.float32
 print(f"Default integer type: {tf.constant(1).dtype}")  # Usually tf.int32
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import numpy as np
+import tensorflow as tf
+
+# Creating tensors
+tensor_1d = tf.constant([1, 2, 3])
+tensor_2d = tf.constant([[1, 2], [3, 4]])
+
+# Basic operations
+addition = tensor_2d + 5
+multiplication = tensor_2d * 3
+matrix_multiplication = tf.matmul(tensor_2d, tensor_2d)
+
+print("Original tensor:", tensor_2d.numpy())
+print("Addition:", addition.numpy())
+print("Multiplication:", multiplication.numpy())
+print("Matrix multiplication:", matrix_multiplication.numpy())
+
+
+
+
+# This is for matrix multiplication. 
+# [a, b] × [e, f] = [a*e + b*g, a*f + b*h]
+# [c, d]   [g, h]   [c*e + d*g, c*f + d*h]
+
+# [1, 2] × [1, 2] = [1*1 + 2*3, 1*2 + 2*4] = [1+6, 2+8] = [7, 10]
+# [3, 4]   [3, 4]   [3*1 + 4*3, 3*2 + 4*4] = [3+12, 6+16] = [15, 22]
+
