@@ -500,3 +500,65 @@ print("Matrix multiplication:", matrix_multiplication.numpy())
 # [1, 2] × [1, 2] = [1*1 + 2*3, 1*2 + 2*4] = [1+6, 2+8] = [7, 10]
 # [3, 4]   [3, 4]   [3*1 + 4*3, 3*2 + 4*4] = [3+12, 6+16] = [15, 22]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Import necessary libraries
+import tensorflow as tf
+from tensorflow import keras
+import numpy as np
+import matplotlib.pyplot as plt
+# Create a simple model with Dense layers
+model = keras.Sequential([
+    keras.layers.Dense(64, activation='relu', input_shape=(10,)),
+    keras.layers.Dense(32, activation='relu'),
+    keras.layers.Dense(16, activation='relu'),
+    keras.layers.Dense(1, activation='sigmoid') # 0.1 It means unlikely but 0.9 its means very likely
+])
+
+# Examine the model
+model.summary()
