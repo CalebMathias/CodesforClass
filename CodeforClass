@@ -562,3 +562,121 @@ model = keras.Sequential([
 
 # Examine the model
 model.summary()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import tensorflow as tf
+from tensorflow import keras
+import numpy as np
+# Create a simple CNN model
+cnn_model = keras.Sequential([
+    keras.layers.Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(28, 28, 1)),
+    keras.layers.MaxPooling2D(pool_size=(2, 2)),
+    keras.layers.Conv2D(64, kernel_size=(3, 3), activation='relu'),
+    keras.layers.MaxPooling2D(pool_size=(2, 2)),
+    keras.layers.Flatten(), # 5x5x64 = 1600 values or numbers.
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dense(10, activation='softmax') # (0.1, 0.05, 0.7)
+])
+
+# Examine the model
+cnn_model.summary()
+
+
+
+
+# Layer names: Automatically named conv2d, max_pooling2d, etc.
+# Output Shape:
+# (None, 26, 26, 32): None is the batch size (can vary); 26, 26 is the feature map size after convolution (28−3+1=26 due to 3×3 kernel); 32 is the number of filters.
+# (None, 13, 13, 32): After pooling, 26×26 is halved to 13×13.
+# (None, 11, 11, 64): Second convolution (13−3+1=11) with 64 filters.
+# (None, 5, 5, 64): After pooling, 11×11 is halved to 5×5 (rounded down).
+# (None, 1600): Flattened to 5×5×64 = 1600 values.
+# (None, 128): Dense layer with 128 neurons.
+# (None, 10): Final layer with 10 neurons for 10 classes.
+# Param # (number of parameters):
+# First Conv2D: (3×3×1×32) + 32 = 288 + 32 = 320 (kernel weights + biases).
+# First MaxPooling2D: 0 (no learnable parameters).
+# Second Conv2D: (3×3×32×64) + 64 = 18432 + 64 = 18496.
+# Second MaxPooling2D: 0.
+# Flatten: 0.
+# First Dense: (1600×128) + 128 = 204800 + 128 = 204928.
+# Second Dense: (128×10) + 10 = 1280 + 10 = 1290.
+# Total: 320 + 18496 + 204928 + 1290 = 225034 parameters.
+# Parameters: These are the weights (filter values, connections) and biases (adjustments) the model learns during training.
+# For beginners: This is like a blueprint of the conveyor belt, showing each station (layer), what it produces (output shape), and how many settings (parameters) it needs to learn.
+# Summary for Beginners
+# This code creates a Convolutional Neural Network (CNN) using Keras, designed for processing images (e.g., recognizing digits in 28×28 grayscale images, like the MNIST dataset).
+# You learned:
+# How to build a CNN with keras.Sequential by stacking layers.
+# Conv2D layers use filters to detect patterns (like edges or shapes) in images.
+# MaxPooling2D layers shrink the data to focus on important features and reduce computation.
+# The Flatten layer converts 2D feature maps into a 1D list for dense layers.
+# Dense layers combine features to make predictions, with the final layer using softmax to output probabilities for 10 classes (e.g., digits 0–9).
+# cnn_model.summary() shows the model’s structure, including layer types, output shapes, and the number of parameters to be learned.
+# This model is suitable for tasks like classifying handwritten digits, but the code only builds and displays the model, not trains or uses it.
+# Notes
+# The input_shape=(28, 28, 1) suggests the model is designed for 28×28 grayscale images (like MNIST digits). Each image must match this shape when training or using the model.
+# The model is not compiled or trained here. Compiling (e.g., model.compile) and training (e.g., model.fit) would require additional steps.
+# The output shapes in the summary assume no padding in convolutions (padding='valid'), which reduces the spatial size (e.g., 28×28 to 26×26). If padding='same' were used, sizes would stay constant.
+# NumPy is imported but not used in this code.
+# If you have more questions, want to see how to train this CNN, or need clarification on any part (e.g., convolutions or parameters), let me know!
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
