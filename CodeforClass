@@ -679,4 +679,114 @@ cnn_model.summary()
 # 
 # 
 # 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import tensorflow as tf
+from tensorflow import keras
+# Create a simple RNN model with LSTM
+rnn_model = keras.Sequential([
+    keras.layers.LSTM(64, return_sequences=True, input_shape=(10, 5)),
+    keras.layers.LSTM(32),
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# Examine the model
+rnn_model.summary()
+
+# Create a model with GRU
+gru_model = keras.Sequential([
+    keras.layers.GRU(64, return_sequences=True, input_shape=(10, 5)),
+    keras.layers.GRU(32),
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# Examine the model
+gru_model.summary()
+
+# Layer names: Automatically named lstm, lstm_1, dense.
+Output Shape:
+(None, 10, 64): None is the batch size (can vary); 10 is the number of time steps (because return_sequences=True); 64 is the number of units.
+(None, 32): Second LSTM outputs 32 values (no sequence, just one vector per sample).
+(None, 10): Dense layer outputs 10 probabilities for 10 classes.
+Param # (number of parameters):
+First LSTM: [(5 inputs + 64 units + 1 bias) × 64 units × 4 gates] = (5 + 64 + 1) × 64 × 4 = 17920. (LSTM has 4 gates: input, forget, cell, output.)
+Second LSTM: [(64 inputs + 32 units + 1 bias) × 32 units × 4 gates] = (64 + 32 + 1) × 32 × 4 = 12416.
+Dense: (32 inputs × 10 units) + 10 biases = 320 + 10 = 330.
+Total: 17920 + 12416 + 330 = 30666 parameters.
+Parameters: These are the weights and biases the model learns during training to process sequences and make predictions.
+For beginners: This is like a blueprint of the conveyor belt, showing each station (layer), what it produces (output shape), and how many settings (parameters) it needs to learn.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 
