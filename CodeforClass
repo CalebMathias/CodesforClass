@@ -1,3 +1,6 @@
+Topic: Tensor flow and numpy collab
+
+
 import tensorflow as tf
 import numpy as np
 # Creating a variable
@@ -41,7 +44,7 @@ print(f"Updated zeros variable: {zeros_var}")
 
 
 
-
+Topic: Tensorflow and Numpy Collab
 
 
 import tensorflow as tf
@@ -120,7 +123,7 @@ bool_tensor = tf.constant([True, False, True], dtype=tf.bool)
 
 
 
-
+Topic: Tensorflow and Numpy Collab
 
 import numpy as np
 import tensorflow as tf
@@ -209,7 +212,7 @@ print(f"New shape: {expanded.shape}")  # TensorShape([1, 2, 3])
 
 
 
-
+Topic: Broadcasting with Tensorflow
 
 import tensorflow as tf
 # Broadcasting example
@@ -270,7 +273,7 @@ print(f"New shape: {transposed.shape}")  # TensorShape([3, 2])
 
 
 
-
+Topic: Tensorflow and Numpy Collab
 
 import tensorflow as tf
 import numpy as np
@@ -367,7 +370,7 @@ print(f"NumPy view after tensor modification: \n{numpy_view}")  # May or may not
 
 
 
-
+Topic: Tensorflow Data Checks, and printings.
 
 import tensorflow as tf
 # Common TensorFlow data types
@@ -471,7 +474,7 @@ print(f"Default integer type: {tf.constant(1).dtype}")  # Usually tf.int32
 
 
 
-
+Topic: Tensorflow and numpy collab mix.
 
 import numpy as np
 import tensorflow as tf
@@ -545,7 +548,7 @@ print("Matrix multiplication:", matrix_multiplication.numpy())
 
 
 
-
+Topic: Tensorflow model stacking 
 
 # Import necessary libraries
 import tensorflow as tf
@@ -613,7 +616,7 @@ model.summary()
 
 
 
-
+Topic: Tensorflow CNN Model
 
 import tensorflow as tf
 from tensorflow import keras
@@ -734,7 +737,7 @@ cnn_model.summary()
 
 
 
-
+Topic: Tensorflow LSTM and GRU modesls.
 
 
 import tensorflow as tf
@@ -788,7 +791,7 @@ For beginners: This is like a blueprint of the conveyor belt, showing each stati
 
 
 
-
+ Topic: Tensorflow Dropout/Batch Noramlization technique. 
 
 import tensorflow
 from tensorflow import keras
