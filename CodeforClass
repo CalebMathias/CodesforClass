@@ -789,4 +789,32 @@ For beginners: This is like a blueprint of the conveyor belt, showing each stati
 
 
 
-# 
+
+import tensorflow
+from tensorflow import keras
+# Create a model with dropout layers
+dropout_model = keras.Sequential([
+    keras.layers.Dense(128, activation='relu', input_shape=(784,)), # RELU example f(x) = max(0, x)
+    keras.layers.Dropout(0.2),
+    keras.layers.Dense(64, activation='relu'),
+    keras.layers.Dropout(0.2),
+    keras.layers.Dense(10, activation='softmax') # What this part does for example For example, if the model is classifying digits, the output might be [0.1, 0.05, 0.6, ..., 0.02], where the highest value (0.6) indicates the predicted digit.
+])
+
+# Examine the model
+dropout_model.summary()
+
+# Create a model with batch normalization
+bn_model = keras.Sequential([
+    keras.layers.Dense(128, activation='relu', input_shape=(784,)), # batch of data during training.
+# It does two things:
+#Scales the outputs so their mean is 0 and variance is 1 (like standardizing data).
+#Learns two parameters per neuron (scale and shift) to adjust the normalized values.
+    keras.layers.BatchNormalization(),
+    keras.layers.Dense(64, activation='relu'),
+    keras.layers.BatchNormalization(),
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# Examine the model
+bn_model.summary()
