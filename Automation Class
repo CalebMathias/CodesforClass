@@ -1,0 +1,192 @@
+# 1. Custom Wait for Element to Be Clickable
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+def custom_wait_example():
+    driver = webdriver.Chrome()
+    try:
+        driver.get("https://example.com")
+        # Wait until button is clickable
+        button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "submitButton"))
+        )
+        button.click()
+    finally:
+        driver.quit()
+
+# 2. Advanced XPath for Dynamic Table
+from selenium.webdriver.common.by import By
+
+def dynamic_table_example():
+    driver = webdriver.Chrome()
+    try:
+        driver.get("https://example.com/table")
+        # Locate all rows in a dynamic table using XPath
+        rows = driver.find_elements(By.XPATH, "//table[@id='dataTable']//tr")
+        # Loop through rows and extract cell data
+        for row in rows:
+            cells = row.find_elements(By.XPATH, ".//td")
+            for cell in cells:
+                print(f"Cell Value: {cell.text}")
+    finally:
+        driver.quit()
+
+# 3. Handling Shadow DOM (Selenium 4+)
+def shadow_dom_example():
+    driver = webdriver.Chrome()
+    try:
+        driver.get("https://example.com/shadow")
+        # Access shadow DOM using JavaScript
+        shadow_host = driver.find_element(By.CSS_SELECTOR, "div#shadowHost")
+        shadow_root = driver.execute_script("return arguments[0].shadowRoot", shadow_host)
+        # Locate element inside shadow DOM
+        shadow_element = shadow_root.find_element(By.CSS_SELECTOR, "input.shadowInput")
+        shadow_element.send_keys("Test Input")
+    finally:
+        driver.quit()
+
+# 4. Page Object Model
+from selenium.webdriver.common.by import By
+
+class LoginPage:
+    def __init__(self, driver):
+        self.driver = driver
+        self.username_field = (By.ID, "username")
+        self.password_field = (By.ID, "password")
+        self.login_button = (By.ID, "loginButton")
+    
+    def login(self, username, password):
+        self.driver.find_element(*self.username_field).send_keys(username)
+        self.driver.find_element(*self.password_field).send_keys(password)
+        self.driver.find_element(*self.login_button).click()
+
+def page_object_example():
+    driver = webdriver.Chrome()
+    try:
+        driver.get("https://example.com/login")
+        login_page = LoginPage(driver)
+        login_page.login("testuser", "testpass")
+    finally:
+        driver.quit()
+
+# 5. Data-Driven Testing with Pytest
+import pytest
+
+@pytest.mark.parametrize("username, password", [
+    ("user1", "pass1"),
+    ("user2", "pass2"),
+    ("user3", "pass3")
+])
+def test_login(username, password):
+    driver = webdriver.Chrome()
+    try:
+        driver.get("https://example.com/login")
+        driver.find_element(By.ID, "username").send_keys(username)
+        driver.find_element(By.ID, "password").send_keys(password)
+        driver.find_element(By.ID, "loginButton").click()
+        print(f"Tested login for: {username}")
+    finally:
+        driver.quit()
+
+# 6. Parallel Cross-Browser Testing with Selenium Grid
+from selenium.webdriver.remote.webdriver import RemoteWebDriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+def cross_browser_example():
+    # Connect to Selenium Grid
+    driver = RemoteWebDriver(
+        command_executor="http://localhost:4444/wd/hub",
+        desired_capabilities=DesiredCapabilities.FIREFOX
+    )
+    try:
+        driver.get("https://example.com")
+        print(f"Page Title: {driver.title}")
+    finally:
+        driver.quit()
+
+# 7. Handling Multiple Windows
+def multiple_windows_example():
+    driver = webdriver.Chrome()
+    try:
+        driver.get("https://example.com")
+        # Store the parent window handle
+        parent_window = driver.current_window_handle
+        # Click a link to open a new window
+        driver.find_element(By.ID, "newWindowLink").click()
+        # Get all window handles and switch to the new one
+        for handle in driver.window_handles:
+            if handle != parent_window:
+                driver.switch_to.window(handle)
+                print(f"New Window Title: {driver.title}")
+                driver.close()  # Close the new window
+        # Switch back to parent window
+        driver.switch_to.window(parent_window)
+    finally:
+        driver.quit()
+
+# 8. Automating File Upload
+def file_upload_example():
+    driver = webdriver.Chrome()
+    try:
+        driver.get("https://example.com/upload")
+        # Locate file upload element and send file path
+        upload_element = driver.find_element(By.ID, "fileUpload")
+        upload_element.send_keys("C:/path/to/sampleFile.pdf")
+        # Submit the form
+        driver.find_element(By.ID, "submitButton").click()
+    finally:
+        driver.quit()
+
+# 9. Measuring Page Load Time
+import time
+
+def page_load_time_example():
+    driver = webdriver.Chrome()
+    try:
+        # Record start time
+        start_time = time.time()
+        # Load the page
+        driver.get("https://example.com")
+        # Record end time and calculate duration
+        end_time = time.time()
+        load_time = end_time - start_time
+        print(f"Page load time: {load_time * 1000} milliseconds")
+    finally:
+        driver.quit()
+
+# 10. Generating a Custom Report with HTML Report
+from selenium.webdriver.common.by import By
+from datetime import datetime
+
+def custom_report_example():
+    driver = webdriver.Chrome()
+    report_lines = []
+    try:
+        driver.get("https://example.com/login")
+        report_lines.append(f"[{datetime.now()}] Navigated to login page")
+        driver.find_element(By.ID, "username").send_keys("testuser")
+        report_lines.append(f"[{datetime.now()}] Entered username: testuser")
+        driver.find_element(By.ID, "loginButton").click()
+        report_lines.append(f"[{datetime.now()}] Clicked login button")
+        # Write report to HTML file
+        with open("report.html", "w") as f:
+            f.write("<html><body><h1>Test Report</h1><ul>")
+            for line in report_lines:
+                f.write(f"<li>{line}</li>")
+            f.write("</ul></body></html>")
+    finally:
+        driver.quit()
+
+# Run all examples
+if __name__ == "__main__":
+    custom_wait_example()
+    dynamic_table_example()
+    shadow_dom_example()
+    page_object_example()
+    cross_browser_example()
+    multiple_windows_example()
+    file_upload_example()
+    page_load_time_example()
+    custom_report_example()
